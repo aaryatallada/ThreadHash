@@ -80,8 +80,9 @@ void hash_table_v1_add_entry(struct hash_table_v1 *hash_table,
 	/* Update the value if it already exists */
 	if (list_entry != NULL) {
 		list_entry->value = value;
-		//return;
-    }else{
+        pthread_mutex_unlock(&mutex);
+		return;
+    }
         
         
         list_entry = calloc(1, sizeof(struct list_entry));
@@ -89,7 +90,7 @@ void hash_table_v1_add_entry(struct hash_table_v1 *hash_table,
         list_entry->value = value;
         SLIST_INSERT_HEAD(list_head, list_entry, pointers);
         
-    }
+    
     pthread_mutex_unlock(&mutex);
 
 
