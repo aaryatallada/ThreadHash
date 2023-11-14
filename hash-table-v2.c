@@ -140,4 +140,7 @@ void hash_table_v2_destroy(struct hash_table_v2 *hash_table)
 		}
 	}
 	free(hash_table);
+    for(int i = 0; i < HASH_TABLE_CAPACITY; i++){
+        pthread_mutex_destroy(&mutexes[i]);
+    }
 }
